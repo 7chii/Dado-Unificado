@@ -1,37 +1,34 @@
-// C++ code
-//
 #include <LiquidCrystal.h>
-
-const int rs = 13,rw=12, en = 11,d0=10, d1=9, d2=8, d3=7, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-
-LiquidCrystal lcd(rs, rw, en, d4, d5, d6, d7);
-
+const int rs=12, rw=11, en=9, d4=7, d5=6, d6=5, d7=4;
+LiquidCrystal lcd(rs, rw, en, d4,d5,d6,d7);
+int var = 0;
 void setup() {
-
-  // set up the LCD's number of columns and rows:
-
-  lcd.begin(16, 2);
-
-  // Print a message to the LCD.
-
-  lcd.print("olar amiguinhos!!!");
-  delay(1000);
-  lcd.clear();
-
+  pinMode(3, INPUT);
+  pinMode(2, INPUT);
+  pinMode(13, INPUT);
+  lcd.begin(16,2);
+  lcd.print(var);
 }
-
 
 void loop() {
-
-  // set the cursor to column 0, line 1
-
-  // (note: line 1 is the second row, since counting begins with 0):
-
-  lcd.setCursor(0, 1);
-
-  // print the number of seconds since reset:
-
-  lcd.print("eu mim amo");
-  lcd.clear();
-
-}
+int  butt1 = digitalRead(3);
+ int  butt2 = digitalRead(2);
+ int butt3 = digitalRead(13);
+  if(butt1==HIGH){
+       lcd.clear();
+       var++;
+       lcd.print(var);
+       delay(150);
+    }else if(butt2==HIGH){
+        lcd.clear();
+       var--;
+       lcd.print(var);
+       delay(150);
+    }else if(butt3==HIGH){
+       int rannum = random(var+1);
+       if(rannum == 0){
+        rannum++;}
+        lcd.clear();
+        lcd.print(rannum);
+    }
+  }
